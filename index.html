@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>Appmanager</title>
+<link rel="stylesheet" href="/index.css" type="text/css" media="all"/> 
+<!--
+choose a button:
+http://www.webdesignerwall.com/demo/css-buttons.html   - by Web Designer Wall
+
+choose gradients from:
+http://www.colorzilla.com/gradient-editor/   - by Colorzilla
+
+<div class="buttons_example_blue"> 
+	<a href="#" class="button blue">Blue</a> 
+	<a href="#" class="button blue bigrounded">Rounded</a> 
+	<a href="#" class="button blue medium">Medium</a> 
+	<a href="#" class="button blue small">Small</a> 
+	<br /><br /> 
+	<input class="button blue" type="button" value="Input Element" /> 
+	<button class="button blue">Button Tag</button> 
+	<span class="button blue">Span</span> 
+	<div class="button blue">Div</div> 
+	<p class="button blue">P Tag</p> 
+	<h3 class="button blue">H3</h3> 
+</div> 
+--> 
+<script type="text/javascript" src="/index.js"></script> 
+<script src="/dojo/1.6.1/dojo/dojo.js" type="text/javascript"></script>
+<script type="text/javascript" src="/savedojo.js"></script>
+</head> 
+ 
+<body class="claro"> 
+<h1><a href="/">App Manager</a></h1> 
+<p><em>by</em> <a href="http://doodkin.com" target="_blank">Shimon Doodkin</a></p> 
+
+<div class="top_menu">
+  <div class="modules_manager_menu menu"> 
+   <a href="javascript://" onclick="switchdiv(0,['modules_manager','app_manager','puchback_changes'])" class="button blue">Node.Js Modules</a>
+  </div>
+  <div class="app_manager_menu menu"> 
+	 <a href="javascript://" onclick="switchdiv(1,['modules_manager','app_manager','puchback_changes'])" class="button pink">Application Manager</a>
+  </div>
+  <div class="puchback_changes_menu menu"> 
+	 <a href="javascript://" onclick="switchdiv(2,['modules_manager','app_manager','puchback_changes'])" class="button green">PushBack Changes</a> 
+  </div>
+</div>
+
+
+
+<div class="modules_manager_body whitebox" id="modules_manager">
+ 1<input type="button" class="button blue" value="ls" onclick="cmd('ls',{},set_modules_manager_result)"><br />
+ npm: <input type="text" id="npm_module">
+      <input type="button"  class="button pink" value="install" onclick="cmd('ls',{name:val('npm_module')},set_modules_manager_result)">
+      
+      
+      <!--layout-- >
+<script type="text/javascript">
+    dojo.require("dijit.layout.ContentPane");
+    dojo.require("dijit.layout.BorderContainer");
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.layout.AccordionContainer");
+</script>
+<style type="text/css">
+    /*html, body { width: 100%; height: 100%; margin: 0; overflow:hidden; }
+    #borderContainerTwo { width: 100%; height: 100%; }
+    */
+    #borderContainerTwo { width: 900px; height: 550px; }
+</style>
+
+      <div dojoType="dijit.layout.BorderContainer" gutters="true" id="borderContainerTwo"
+liveSplitters="false">
+    <div dojoType="dijit.layout.ContentPane" region="top" splitter="false">
+        Hi, usually here you would have important information, maybe your company
+        logo, or functions you need to access all the time..
+    </div>
+    <div dojoType="dijit.layout.AccordionContainer" minSize="20" style="width: 300px;"
+    id="leftAccordion" region="leading" splitter="true">
+        <div dojoType="dijit.layout.AccordionPane" title="npm tags" selected="true">
+< !-- myStores = dojox.data.CouchDBRestStore.getStores("http://192.168.0.68:5984/_utils/"); http://www.sitepen.com/blog/2008/09/26/couchdbreststore/-- >
+-->
+
+<div dojoType="dojox.data.JsonRestStore" jsId="continentStore" id="continentStore" target="/datastore/db/tbl1/" idAttribute="id" >
+</div>
+<div dojoType="dijit.tree.ForestStoreModel" jsId="continentModel" store="continentStore"
+query="{}" rootId="continentRoot" rootLabel="Continents"
+childrenAttrs="children">
+</div>
+<div dojoType="dijit.Tree" id="mytree" model="continentModel" openOnClick="true">
+    <script type="dojo/method" event="onClick" args="item">
+        alert("Execute of node " + continentStore.getLabel(item) + ", population=" + continentStore.getValue(item, "population"));
+    </script>
+</div>
+<script type="text/javascript">
+    dojo.require("dojox.data.JsonRestStore");
+    dojo.require("dijit.Tree");
+
+    dojo.addOnLoad(function() {
+        /*var store = new dojo.data.ItemFileReadStore({
+            url: "/moin_static185/js/dojo/trunk/dojo/..//dijit/tests/_data/countries.json"
+        });
+
+        var treeModel = new dijit.tree.ForestStoreModel({
+            store: store,
+            query: {
+                "type": "continent"
+            },
+            rootId: "root",
+            rootLabel: "Continents",
+            childrenAttrs: ["children"]
+        });
+
+        new dijit.Tree({
+            model: treeModel
+        },
+        "treeOne");
+        */
+    });
+</script>
+
+<!--
+          <center id="npm_tags_load"><input type="button" value="load" class="button blue"></center>
+        </div>
+        < !--
+        <div dojoType="dijit.layout.AccordionPane" title="Even more fancy">
+        </div>
+        <div dojoType="dijit.layout.AccordionPane" title="Last, but not least">
+        </div>
+        -- >
+    </div>
+    < !-- end AccordionContainer -- >
+    <div dojoType="dijit.layout.TabContainer" region="center" tabStrip="true">
+        <div dojoType="dijit.layout.ContentPane" title="My first tab" selected="true">
+            Lorem ipsum and all around...
+        </div>
+        <div dojoType="dijit.layout.ContentPane" title="My second tab">
+            Lorem ipsum and all around - second...
+        </div>
+        <div dojoType="dijit.layout.ContentPane" title="My last tab" closable="true">
+            Lorem ipsum and all around - last...
+        </div>
+    </div>
+    < !-- end TabContainer -- >
+</div>
+< !-- end BorderContainer -- >
+
+      < !-- /layout -->
+      
+<!-- grid -->
+   <style type="text/css">
+									@import "/dojo/1.6.1/dijit/themes/claro/claro.css";				
+									@import "/dojo/1.6.1/dojox/grid/enhanced/resources/claro/EnhancedGrid.css";
+									#grid1	{ height:250px; font:13px Arial; }
+   </style>
+                  <div id="grid1" dojoType="dojox.grid.EnhancedGrid" query="{ }" rowsPerPage="30" 
+									plugins='{filter: false, dnd: true, indirectSelection: true, menus:{headerMenu:"headerMenu", rowMenu:"rowMenu", cellMenu:"cellMenu", selectedRegionMenu:"selectedRegionMenu"}}'
+									store="csvStore1" structure="layout" rowSelector="20px"> 
+									<div dojoType="dijit.Menu" id="headerMenu"  style="display: none;"> 
+										<div dojoType="dijit.MenuItem">Header Menu Item 1</div> 
+										<div dojoType="dijit.MenuItem">Header Menu Item 2</div> 
+										<div dojoType="dijit.MenuItem">Header Menu Item 3</div> 
+										<div dojoType="dijit.MenuItem">Header Menu Item 4</div> 
+									</div> 
+									<div dojoType="dijit.Menu" id="rowMenu"  style="display: none;"> 
+										<div dojoType="dijit.MenuItem">Row Menu Item 1</div> 
+										<div dojoType="dijit.MenuItem">Row Menu Item 2</div> 
+										<div dojoType="dijit.MenuItem">Row Menu Item 3</div> 
+										<div dojoType="dijit.MenuItem">Row Menu Item 4</div> 
+									</div> 
+									<div dojoType="dijit.Menu" id="cellMenu"  style="display: none;"> 
+										<div dojoType="dijit.MenuItem">Cell Menu Item 1</div> 
+										<div dojoType="dijit.MenuItem">Cell Menu Item 2</div> 
+										<div dojoType="dijit.MenuItem">Cell Menu Item 3</div> 
+										<div dojoType="dijit.MenuItem">Cell Menu Item 4</div> 
+									</div> 
+									<div dojoType="dijit.Menu" id="selectedRegionMenu"  style="display: none;"> 
+										<div dojoType="dijit.MenuItem">Action 1 for Selected Region</div> 
+										<div dojoType="dijit.MenuItem">Action 2 for Selected Region</div> 
+										<div dojoType="dijit.MenuItem">Action 3 for Selected Region</div> 
+										<div dojoType="dijit.MenuItem">Action 4 for Selected Region</div> 
+									</div> 
+								</div> 
+								<br/> 
+								<button dojoType="dijit.form.Button" onClick='dijit.byId("grid1").rowSelectCell.toggleAllSelection(true)'>Select All</button> 
+								&nbsp;&nbsp;
+								<button dojoType="dijit.form.Button" onClick='dijit.byId("grid1").rowSelectCell.toggleAllSelection(false)'>Deselect All</button>
+                <input type="text" onchange='dijit.byId("grid1").setQuery(this.value==""?{}:{name:this.value});'> 
+								
+   <script language="javascript">
+   //http://www.sitepen.com/blog/2008/10/31/json-schema/
+   
+    //requires
+    dojo.require('dojox.grid.EnhancedGrid');
+    dojo.require('dojox.grid.enhanced.plugins.DnD');
+    dojo.require('dojox.grid.enhanced.plugins.Menu');
+    dojo.require('dojox.grid.enhanced.plugins.IndirectSelection');
+    dojo.require("dojox.grid.enhanced.plugins.Filter");
+    dojo.require('dojox.data.JsonRestStore');
+    dojo.require('dijit.form.Button');
+    dojo.require('dojo.parser');
+
+    //when resources are loaded
+    dojo.ready(function() {
+        //layout
+        layout = [{
+            defaultCell: { width: 8, editable: false, type: dojox.grid.cells._Widget },
+            rows:
+            [
+                { field: 'id', width: '10' },
+                { field: 'name', width: '10' },
+                { field: 'value', width: '15' },
+                { field: 'grouptype', width: '6' }
+            ]}
+        ];
+        //get data store
+        csvStore1 = new dojox.data.JsonRestStore({ id:'csvStore1', target:'/datastore/db/tbl1/', idAttribute:"id" });
+        
+
+        //parse!
+        dojo.parser.parse();
+        
+    });
+   </script>
+   <!-- end grid -->
+ <pre id="modules_manager_result">
+ </pre>
+</div>
+
+<div class="app_manager_body whitebox" id="app_manager" style="display:none">
+ 2<input type="button" class="button blue" value="ls" onclick="cmd('ls',{},set_modules_manager_result)"><br />
+ npm: <input type="text" id="npm_module">
+      <input type="button"  class="button pink" value="install" onclick="cmd('ls',{name:val('npm_module')},set_modules_manager_result)">
+ <pre id="app_manager_result">
+ </pre>
+</div>
+
+<div class="puchback_changes_body whitebox" id="puchback_changes" style="display:none">
+3 <input type="button" class="button blue" value="ls" onclick="cmd('ls',{},set_modules_manager_result)"><br />
+ npm: <input type="text" id="npm_module">
+      <input type="button"  class="button pink" value="install" onclick="cmd('ls',{name:val('npm_module')},set_modules_manager_result)">
+ <pre id="puchback_changes_result">
+ </pre>
+</div>
+ 
+</body> 
+</html>
