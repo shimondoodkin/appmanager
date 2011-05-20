@@ -1,0 +1,17 @@
+{
+  "author": "Shimon Doodkin <helpmepro1@gmail.com> (http://doodkin.com)",
+  "name": "appmanager",
+  "description": "A RAD IDE  contains GUI interfaces to usual Node.js actions during development",
+  "version": "0.0.0",
+  "homepage": "https://docs.google.com/document/d/1anJzzbK9kzAWf3_doIMcKxsEanN6EsdwdvEFZYd8Tdw/edit?hl=en",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shimondoodkin/appmanager.git"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": ">0.4.4"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

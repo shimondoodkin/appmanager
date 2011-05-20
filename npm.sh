@@ -1,5 +1,5 @@
-npm_config_userconfig=/mnt/hda1/www/vot.me/node_modules/appmanager/npm-config
+npm_config_userconfig=/mnt/hda1/www/vot.me/node_modules/appmanager/config.npm
 export npm_config_userconfig
-npm_config_globalconfig=/mnt/hda1/www/vot.me/node_modules/appmanager/npm-config
+npm_config_globalconfig=/mnt/hda1/www/vot.me/node_modules/appmanager/config.npm
 export npm_config_globalconfig
 node /mnt/hda1/www/vot.me/node_modules/appmanager/node_modules/npm/cli.js $*

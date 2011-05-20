@@ -15,7 +15,7 @@ function val(id)
 }
 function set_modules_manager_result(str)
 {
-  document.getElementById("modules_manager_result").innerHTML = str;
+  document.getElementById("xhr_result").innerHTML = str;
 }
 
 function cmd(command_name,vars,result)
