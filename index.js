@@ -1,21 +1,39 @@
-function switchdiv(divn,divs)
-{
- var div=divs[divn]
- if(document.getElementById(div).style.display!='none') return;
- for(var x in divs)
- {
-  document.getElementById(divs[x]).style.display='none';
- }
- document.getElementById(div).style.display='';
-}
+
+$(document).ready(function(){
+  
+  now.name = prompt("What's your name?", "");  
+  now.receiveMessage = function(name, message){
+    $("#messages").append("<br>" + name + ": " + message);
+  }
+  
+  $("#send-button").click(function(){
+    now.distributeMessage($("#text-input").val());
+    $("#text-input").val("");
+  });
+  
+});
 
 function val(id)
 {
  return document.getElementById(id).value;
 }
+
 function set_modules_manager_result(str)
 {
-  document.getElementById("xhr_result").innerHTML = str;
+  var d=document.createElement('textarea');
+  d.innerHTML = str;
+  d.style.position='absolute';
+  d.style.backgroundColor='#fff';
+  d.style.border='1px solid black';
+  d.style.padding='20px';
+  d.style.top='5%';
+  d.style.left='25%';
+  d.style.width='50%';
+  d.title="double click to close";
+  d.ondblclick=function(){ var x=this.parentNode.removeChild(this);delete x;}
+  document.body.appendChild(d);
+  return str;
+  //document.getElementById("xhr_result").innerHTML = str;
 }
 
 function cmd(command_name,vars,result)
